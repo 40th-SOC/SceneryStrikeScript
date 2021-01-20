@@ -26,5 +26,5 @@ scenery.init()
 ## Development
 
 1. Clone this repo
-2. Rename `config.example.lua` to `config.lua`
-3. Rename `test_mission.example.miz` to `test_mission.miz`
+2. Copy and rename `config.example.lua` to `config.lua`
+3. Copy and rename `test_mission.example.miz` to `test_mission.miz`
