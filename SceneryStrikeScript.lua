@@ -5,7 +5,6 @@ do
     local internalConfig = {}
 
     local configDefaults = {
-        ["POLL_INTERVAL"] = 600,
         ["WRITE_REPORT"] = true,
         ["REPORT_FILENAME"] = "scenery_strike_report.csv",
         ["ZONES"] = {},
