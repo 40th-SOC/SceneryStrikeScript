@@ -111,6 +111,8 @@ do
         end
     end
 
+    local eventHandlers = {}
+
     local function eventHandler(event)
         local object = event.initiator
         if object == nil then
@@ -128,6 +130,10 @@ do
 
                     zoneStatus[zone] = "dead"
                     writeReport()
+
+                    for i,handler in ipairs(eventHandlers) do
+                        handler(zone)
+                    end
                 end
             end
         end
@@ -142,5 +148,9 @@ do
         mist.addEventHandler(eventHandler)
 
         trigger.action.outText("SceneryStrikeScript initialized", 30)
+    end
+
+    function scenery.onTargetDestroyed(handler)
+        table.insert(eventHandlers, handler)
     end
 end
