@@ -12,6 +12,7 @@ do
         ["PERSISTENT"] = true,
     }
     
+    -- [<scenery object id] = <tgt zone name>
     local buildingLookup = {}
     local targetToMissionLookup = {}
     local internalConfig = {}
@@ -58,7 +59,7 @@ do
         end
 
         local csv = ""
-        for zone,status in pairs(zoneStatus) do
+        for id,tgtZoneName in pairs(buildingLookup) do
             local row = string.format("%s,%s\n", zone, status)
             csv = csv .. row
         end
@@ -75,22 +76,15 @@ do
         end
 
         if event.id == world.event.S_EVENT_DEAD and object:getCategory() == Object.Category.SCENERY then
-            -- local zone = buildingLookup[object:getName()]
+            local zone = buildingLookup[object:getName()]
 
-            -- if zone then
-            --     local deadObjects = mist.getDeadMapObjsInZones({ zone })
+            if zone then
+                
 
-            --     if #deadObjects >= internalConfig.ZONES[zone] then
-            --         log("%s target(s) destroyed", zone)
-
-            --         zoneStatus[zone] = "dead"
-            --         writeReport()
-
-            --         for i,handler in ipairs(eventHandlers) do
-            --             handler(zone)
-            --         end
-            --     end
-            -- end
+                for i,handler in ipairs(eventHandlers) do
+                    handler(zone)
+                end
+            end
         end
     end
 
@@ -101,32 +95,6 @@ do
 
     local function rgbMatch(target, source)
         return target.r == source.r and target.g == source.g and target.b == source.b
-    end
-
-    local function findSceneryObjects(zone)
-        local foundObjects = {}
-        debugTable(zone)
-        -- local z = trigger.misc.getZone(zone)
-
-        -- if not z then
-        --     log("zone %s not found", zone)
-        --     return
-        -- end
-    
-        -- local cb = function(item, val)
-        --     table.insert(foundObjects, item)
-        -- end
-    
-        
-        -- world.searchObjects(Object.Category.SCENERY, {
-        --     id = world.VolumeType.SPHERE,
-        --     params = {
-        --       point = z.point,
-        --       radius = z.radius,
-        --     },
-        -- }, cb)
-    
-        return foundObjects
     end
 
     local function findZones()
