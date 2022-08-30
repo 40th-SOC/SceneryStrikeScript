@@ -12,8 +12,8 @@ See the `test_mission.example.miz` for an example.
 
 ```lua
 scenery.config.ZONES = {
-    ["Bad Guy Building"]     = 1,
-    ["Other Structure"]  = 1,
+    ["Bad Guy Building"] = 1,
+    ["Other Structure"] = 1,
     ["Storage Tanks"] = 4,
 }
 
